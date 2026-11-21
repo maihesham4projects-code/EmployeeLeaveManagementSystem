@@ -1,0 +1,16 @@
+INSERT INTO Employees
+(Name, Email, AnnualLeaveBalance, CreatedAt)
+VALUES
+('Ahmed Ali', 'ahmed@test.com', 21, '2026-10-01 09:00:00'),
+('Sara Mohamed', 'sara@test.com', 15, '2026-10-05 10:30:00'),
+('Mohamed Hassan', 'mohamed@test.com', 18, '2026-10-10 11:00:00'),
+('Mona Ibrahim', 'mona@test.com', 20, '2026-10-15 12:00:00'),
+('Omar Khaled', 'omar@test.com', 10, '2026-10-20 14:00:00');
+INSERT INTO LeaveRequests
+(EmployeeId, StartDate, EndDate, Reason, Status, CreatedAt)
+VALUES
+(2, '2026-12-01', '2026-12-03', 'Family vacation', 1, '2026-11-15 10:30:00'),
+(2, '2026-12-10', '2026-12-12', 'Personal reasons', 2, '2026-11-16 11:00:00'),
+(4, '2026-12-05', '2026-12-06', 'Medical appointment', 3, '2026-11-17 09:15:00'),
+(3, '2026-12-15', '2026-12-19', 'Travel', 1, '2026-11-18 12:00:00'),
+(4, '2026-12-20', '2026-12-22', 'Family event', 2, '2026-11-19 14:30:00');

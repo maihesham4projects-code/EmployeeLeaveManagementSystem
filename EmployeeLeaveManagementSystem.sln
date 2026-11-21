@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeLeaveSystemData", "EmployeeLeaveSystemData\EmployeeLeaveSystemData.csproj", "{A13CC175-C3E8-44D4-A5DB-938F669F63B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeLeaveManagementSystem", "EmployeeLeaveManagementSystem\EmployeeLeaveManagementSystem.csproj", "{342BA322-6F08-4BCB-80DD-406E1A11353F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A13CC175-C3E8-44D4-A5DB-938F669F63B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13CC175-C3E8-44D4-A5DB-938F669F63B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A13CC175-C3E8-44D4-A5DB-938F669F63B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A13CC175-C3E8-44D4-A5DB-938F669F63B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342BA322-6F08-4BCB-80DD-406E1A11353F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342BA322-6F08-4BCB-80DD-406E1A11353F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342BA322-6F08-4BCB-80DD-406E1A11353F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342BA322-6F08-4BCB-80DD-406E1A11353F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99229E49-E814-4E3D-BEC3-EA08C470BDF7}
+	EndGlobalSection
+EndGlobal
