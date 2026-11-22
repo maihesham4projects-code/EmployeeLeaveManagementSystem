@@ -1,4 +1,5 @@
-﻿using EmployeeLeaveSystemData;
+﻿using EmployeeLeaveManagementSystem.Services;
+using EmployeeLeaveSystemData;
 using EmployeeLeaveSystemData.Entites;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,21 +16,26 @@ namespace EmployeeLeaveManagementSystem.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            using var context = new EmployeeLeaveContext();
 
-            var employees = context.employees.ToList();
+            try
+            {
+                EmployeeService employeeService = new EmployeeService();
 
-            return Ok(employees);
+                return Ok(employeeService.GetAllEmployees());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/employees/1
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            using var context = new EmployeeLeaveContext();
+            EmployeeService employeeService = new EmployeeService();
 
-            var employee = context.employees
-                .FirstOrDefault(e => e.Id == id);
+            var employee = employeeService.GetEmployee(id);
 
             if (employee == null)
                 return NotFound("Employee not found");
@@ -41,87 +47,50 @@ namespace EmployeeLeaveManagementSystem.Controllers
         [HttpPost]
         public IActionResult Add(Employee employee)
         {
-            using var context = new EmployeeLeaveContext();
-
-            // Validation
-            if (string.IsNullOrWhiteSpace(employee.Name))
-                return BadRequest("Employee name is required");
-
-            if (string.IsNullOrWhiteSpace(employee.Email))
-                return BadRequest("Employee email is required");
-
-            if (context.employees.Any(e => e.Email == employee.Email))
-                return BadRequest("Email already exists");
-
-            if (employee.AnnualLeaveBalance < 0)
-                return BadRequest("Leave balance cannot be negative");
-
-            // Object initialization
-            employee.CreatedAt = DateTime.Now;
-
-            // Database operation
-            context.employees.Add(employee);
-            context.SaveChanges();
-
-            return Ok(employee);
+            try
+            {
+                EmployeeService employeeService = new EmployeeService();
+                var result = employeeService.AddEmployee(employee);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/employees/1
         [HttpPut("{id}")]
         public IActionResult Update(int id, Employee updatedEmployee)
         {
-            using var context = new EmployeeLeaveContext();
-            var employee = context.employees
-                .FirstOrDefault(e => e.Id == id);
+            try
+            {
+                EmployeeService employeeService = new EmployeeService();
+                var result = employeeService.UpdateEmployee(id, updatedEmployee);
 
-            if (employee == null)
-                return NotFound("Employee not found");
-
-            if (string.IsNullOrWhiteSpace(updatedEmployee.Name))
-                return BadRequest("Employee name is required");
-
-            if (string.IsNullOrWhiteSpace(updatedEmployee.Email))
-                return BadRequest("Employee email is required");
-
-            bool emailExists = context.employees.Any(e =>
-                e.Email == updatedEmployee.Email && e.Id != id);
-
-            if (emailExists)
-                return BadRequest("Email already exists");
-
-            if (updatedEmployee.AnnualLeaveBalance < 0)
-                return BadRequest("Leave balance cannot be negative");
-
-            employee.Name = updatedEmployee.Name;
-            employee.Email = updatedEmployee.Email;
-            employee.AnnualLeaveBalance = updatedEmployee.AnnualLeaveBalance;
-
-            context.SaveChanges();
-
-            return Ok(employee);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/employees/1
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            using var context = new EmployeeLeaveContext();
+            try
+            {
+                EmployeeService employeeService = new EmployeeService();
+                employeeService.DeleteEmployee(id);
 
-            var employee = context.employees
-                .Include(e => e.LeaveRequests)
-                .FirstOrDefault(e => e.Id == id);
-
-            if (employee == null)
-                return NotFound("Employee not found");
-
-            if (employee.LeaveRequests.Any())
-                return BadRequest(
-                    "Cannot delete an employee who has leave requests");
-
-            context.employees.Remove(employee);
-            context.SaveChanges();
-
-            return Ok("Employee deleted successfully");
+                return Ok("Employee deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
